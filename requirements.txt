@@ -1,3 +1,13 @@
+# Core Data & Mathematics
 pandas>=2.0
 numpy>=1.24
+scipy>=1.10
+
+# Machine Learning & Modeling
 scikit-learn>=1.5
+xgboost>=2.0
+joblib>=1.3
+
+# Visualization
+matplotlib>=3.7
+seaborn>=0.12
