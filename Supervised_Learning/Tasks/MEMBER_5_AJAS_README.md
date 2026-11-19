@@ -19,7 +19,7 @@
   - **Regularization & Sampling**: Subsample ratio 0.8, column subsample by tree 0.8 to prevent overfitting.
   - **Preprocessing**: Robust `ColumnTransformer` with numeric median imputation, standard scaling, and categorical one-hot encoding.
   - **Target Encoding**: `LabelEncoder` mapped to IMD rainfall labels (*Very Light, Light, Moderate, Heavy, Very Heavy, Extremely Heavy*).
-- **Result**: **Highest performing model overall** (Accuracy: **43.63%**, Weighted F1: **0.3922**).
+- **Result**: **Highest performing model overall** (Accuracy: **43.61%**, Weighted F1: **0.3920**).
 
 ---
 
@@ -55,11 +55,11 @@
 ================================================================================
 Model            Accuracy   Macro Prec   Macro Rec   Macro F1   Weighted F1   Train Time
 --------------------------------------------------------------------------------
-XGBoost          0.4363     0.2191       0.1978      0.1843     0.3922        4.01s
-KNN              0.3976     0.1827       0.1787      0.1648     0.3539        0.00s
-Random Forest    0.3000     0.1908       0.2129      0.1880     0.3158        14.12s
-Decision Tree    0.2970     0.2063       0.2957      0.2101     0.3145        1.84s
-SVC              0.2844     0.1971       0.2166      0.1846     0.3069        16.50s
+XGBoost          0.4361     0.2295       0.1978      0.1846     0.3920        4.10s
+KNN              0.3978     0.1816       0.1785      0.1643     0.3535        0.00s
+Random Forest    0.3059     0.1950       0.2287      0.1946     0.3210        12.28s
+SVC              0.2932     0.2025       0.2262      0.1916     0.3150        13.35s
+Decision Tree    0.2920     0.2145       0.3053      0.2179     0.3067        1.30s
 ================================================================================
 ```
 

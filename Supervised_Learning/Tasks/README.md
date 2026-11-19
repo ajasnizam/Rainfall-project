@@ -39,7 +39,7 @@ This directory contains the documentation of individual contributions for the **
 - Delivered instantaneous training execution (~0.00s) and strong baseline accuracy (39.76%).
 
 ### [Member 5 – Ajas](./MEMBER_5_AJAS_README.md)
-- **XGBoost Implementation**: Created the top-performing `xgboost_model.py` (Accuracy: **43.63%**, Weighted F1: **0.3922**).
+- **XGBoost Implementation**: Created the top-performing `xgboost_model.py` (Accuracy: **43.61%**, Weighted F1: **0.3920**).
 - **Quality Assurance & Configuration**: Audited and debugged all team models, fixed path issues, eliminated dependency errors, suppressed warnings, removed unnecessary file writes, and standardized `==` header outputs across every script.
 - **Comparative Benchmarking**: Engineered and executed `test_models.py` to evaluate all models side-by-side on an identical stratified split and determine the overall winning model.
 - **Linear Regression**: Implemented baseline regression model (`Linear_Regression.py`) for continuous precipitation prediction (`RMSE: 25.56 mm`).

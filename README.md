@@ -1,6 +1,6 @@
 # Kerala Daily Rainfall – ETL Pipeline, EDA & Supervised Learning
 
-A comprehensive Data Engineering and Machine Learning project that transforms raw Indian Government meteorological telemetry (53,162 records with non-standard timestamps, missing administrative hierarchies, and duplicates) into a clean, analysis-ready dataset (52,522 rows × 24 columns), conducts in-depth Exploratory Data Analysis (EDA), and trains a suite of Supervised Machine Learning models to classify rainfall intensity and predict precipitation volumes.
+A comprehensive Data Engineering and Machine Learning project that transforms raw Indian Government meteorological telemetry (53,162 records with non-standard timestamps, missing administrative hierarchies, and duplicates) into a clean, analysis-ready dataset (52,522 rows × 21 columns), conducts in-depth Exploratory Data Analysis (EDA), and trains a suite of Supervised Machine Learning models to classify rainfall intensity and predict precipitation volumes.
 
 ---
 
@@ -37,21 +37,21 @@ Kerala's tropical monsoon climate features high-volume, erratic deluges leading 
 | **Dataset Name** | Kerala Surface Water Manual Daily Rainfall Station Data |
 | **Provider** | National Water Development Agency / National Water Informatics Centre (NWIC), Ministry of Jal Shakti, Government of India |
 | **Portal Link** | [NWIC Kerala Daily Rainfall Portal](https://nwdp.nwic.gov.in/dataset/rainfall-kerala-surface-water-manual-daily/resource/d175f1f6-cccf-4980-97ab-877650d05074) |
-| **Raw Format** | CSV (20 columns, 53,162 raw records) |
+| **Raw Format** | CSV (15 columns, 53,162 raw records) |
 | **Coverage** | All 14 Kerala districts, 104+ rain-gauge stations |
-| **Clean Output** | 52,522 validated records × 24 engineered features |
+| **Clean Output** | 52,522 validated records × 21 engineered features |
 
 ---
 
 ## End-to-End Workflow
 
 ```
-                        Raw Data Source (raw_data/rainfall_1.csv)
+                        Raw Data Source (raw_data/rainfall new.csv)
                                          │
                                          ▼
     ┌──────────────────────────────────────────────────────────────────────────┐
     │ 1. EXTRACT & VALIDATE                                                    │
-    │ • Ingest raw records, assert dimensions (53,162 rows × 20 cols)          │
+    │ • Ingest raw records, assert dimensions (53,162 rows × 15 cols)          │
     │ • Check boundary conditions, null thresholds, non-negative values        │
     │ • Responsibility: Member 2 (Jesvin)                                      │
     └──────────────────────────────────────────────────────────────────────────┘
@@ -92,7 +92,7 @@ Kerala's tropical monsoon climate features high-volume, erratic deluges leading 
 ```
 Rainfall-project/
 ├── raw_data/
-│   ├── rainfall_1.csv                      # Raw telemetry from government portal
+│   ├── rainfall new.csv                    # Raw telemetry from government portal
 │   └── rainfall_raw_copy.csv               # Automated extract archive copy
 ├── reports/                                # Generated analytical reports (11 CSVs)
 │   ├── cleaned_data.csv                    # Complete cleaned dataset copy
@@ -107,7 +107,7 @@ Rainfall-project/
 │   ├── highest_lowest_values.csv           # Extreme statistical boundary metrics
 │   └── transformation_log.csv              # Row-by-row transformation audit trail
 ├── output/
-│   ├── analysis_ready_rainfall.csv         # Production analysis-ready dataset (52,522 rows × 24 cols)
+│   ├── analysis_ready_rainfall.csv         # Production analysis-ready dataset (52,522 rows × 21 cols)
 │   └── eda/                                # Rendered publication-grade EDA chart images (10 PNGs)
 ├── screenshots/                            # Pipeline verification screenshots
 ├── EDA/                                    # Exploratory Data Analysis suite
@@ -147,7 +147,7 @@ Rainfall-project/
 | **Member 2** | **Jesvin** | **Extraction & Validation**<br>Built `extract()`, `validate()`, dimension assertions, and EDA Charts 2 & 4. | **Decision Tree Classification**<br>Developed `Decision_Tree.py` with balanced class weights to maximize minority deluge recall. |
 | **Member 3** | **Sreejith** | **Data Cleaning & Structure**<br>Built `transform()` Part 1 (T1–T9), duplicate handling, date parsing, and EDA Charts 5 & 6. | **K-Nearest Neighbors (KNN)**<br>Developed `knn_model.py` with standardized Euclidean distance matching and instant fitting. |
 | **Member 4** | **Adharsh** | **Feature Engineering & Reports**<br>Built `transform()` Part 2 (T10–T14), generated 11 CSV reports, and EDA Charts 3 & 8. | **Random Forest Classification**<br>Developed `RandomForest.py` (300 estimators, `VarianceThreshold`, and ANOVA F-score `SelectKBest`). |
-| **Member 5** | **Ajas**<br>*(Team Lead)* | **Loading, Pipeline Orchestration & EDA Architecture**<br>Built `load()`, `run_etl_pipeline()`, architected `EDA/eda.ipynb`, repo management, and EDA Charts 1, 7, 9, 10. | **XGBoost, Model Audit & Benchmark Suite**<br>Created `xgboost_model.py` (Top overall accuracy: 43.63%), audited/debugged all team models, built `test_models.py` benchmark, and created baseline `Linear_Regression.py`. |
+| **Member 5** | **Ajas**<br>*(Team Lead)* | **Loading, Pipeline Orchestration & EDA Architecture**<br>Built `load()`, `run_etl_pipeline()`, architected `EDA/eda.ipynb`, repo management, and EDA Charts 1, 7, 9, 10. | **XGBoost, Model Audit & Benchmark Suite**<br>Created `xgboost_model.py` (Top overall accuracy: 43.61%), audited/debugged all team models, built `test_models.py` benchmark, and created baseline `Linear_Regression.py`. |
 
 ---
 
@@ -193,23 +193,23 @@ All models were evaluated on the exact same 80/20 stratified split (42,017 train
 ================================================================================
 Model            Accuracy   Macro Prec   Macro Rec   Macro F1   Weighted F1   Train Time
 --------------------------------------------------------------------------------
-XGBoost          0.4363     0.2191       0.1978      0.1843     0.3922        4.01s
-KNN              0.3976     0.1827       0.1787      0.1648     0.3539        0.00s
-Random Forest    0.3000     0.1908       0.2129      0.1880     0.3158        14.12s
-Decision Tree    0.2970     0.2063       0.2957      0.2101     0.3145        1.84s
-SVC              0.2844     0.1971       0.2166      0.1846     0.3069        16.50s
+XGBoost          0.4361     0.2295       0.1978      0.1846     0.3920        4.10s
+KNN              0.3978     0.1816       0.1785      0.1643     0.3535        0.00s
+Random Forest    0.3059     0.1950       0.2287      0.1946     0.3210        12.28s
+SVC              0.2932     0.2025       0.2262      0.1916     0.3150        13.35s
+Decision Tree    0.2920     0.2145       0.3053      0.2179     0.3067        1.30s
 ================================================================================
 ```
 
 ### Key Findings & Winning Model
 
-1. **🏆 Best Overall Model – XGBoost (Accuracy: 43.63%, Weighted F1: 0.3922)**:
+1. **🏆 Best Overall Model – XGBoost (Accuracy: 43.61%, Weighted F1: 0.3920)**:
    - Delivers the highest overall predictive accuracy and highest weighted F1-score across all 6 IMD rainfall categories.
-   - Robustly captures non-linear meteorological interactions while maintaining high training efficiency (~4.0s).
-2. **Best Balanced Minority Recall – Decision Tree (Macro F1: 0.2101, Macro Recall: 0.2957)**:
-   - Achieves the highest recall on severe minority classes (50% on *Extremely Heavy* rainfall) through balanced class weighting.
+   - Robustly captures non-linear meteorological interactions while maintaining high training efficiency (~4.1s).
+2. **Best Balanced Minority Recall – Decision Tree (Macro F1: 0.2179, Macro Recall: 0.3053)**:
+   - Achieves the highest recall on severe minority classes through balanced class weighting.
 3. **Fastest Execution – KNN (Instantaneous fit, ~0.00s)**:
-   - Competitive baseline accuracy (39.76%) with zero upfront training cost.
+   - Competitive baseline accuracy (39.78%) with zero upfront training cost.
 4. **Regression Baseline – Linear Regression (`RMSE = 25.56 mm`)**:
    - Quantifies the linear relationship of spatial coordinates and day-of-year seasonal variables on continuous rainfall volume.
 

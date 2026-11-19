@@ -42,25 +42,25 @@ All classification models were trained and benchmarked on the identical 80/20 st
 ================================================================================
 Model            Accuracy   Macro Prec   Macro Rec   Macro F1   Weighted F1   Train Time
 --------------------------------------------------------------------------------
-XGBoost          0.4363     0.2191       0.1978      0.1843     0.3922        4.01s
-KNN              0.3976     0.1827       0.1787      0.1648     0.3539        0.00s
-Random Forest    0.3000     0.1908       0.2129      0.1880     0.3158        14.12s
-Decision Tree    0.2970     0.2063       0.2957      0.2101     0.3145        1.84s
-SVC              0.2844     0.1971       0.2166      0.1846     0.3069        16.50s
+XGBoost          0.4361     0.2295       0.1978      0.1846     0.3920        4.10s
+KNN              0.3978     0.1816       0.1785      0.1643     0.3535        0.00s
+Random Forest    0.3059     0.1950       0.2287      0.1946     0.3210        12.28s
+SVC              0.2932     0.2025       0.2262      0.1916     0.3150        13.35s
+Decision Tree    0.2920     0.2145       0.3053      0.2179     0.3067        1.30s
 ================================================================================
 ```
 
 ### 🏆 Key Findings & Verdict
 
-1. **Best Overall Model – XGBoost (Accuracy: 43.63%, Weighted F1: 0.3922)**
+1. **Best Overall Model – XGBoost (Accuracy: 43.61%, Weighted F1: 0.3920)**
    - Delivers the highest overall classification accuracy and strongest generalization across complex meteorological feature interactions.
-   - Fast and efficient training duration (~4.0s).
+   - Fast and efficient training duration (~4.1s).
 
-2. **Best Balanced Minority Recall – Decision Tree (Macro F1: 0.2101, Macro Recall: 0.2957)**
-   - Utilizes balanced class weighting to capture underrepresented extreme weather categories (e.g., *Extremely Heavy* and *Very Heavy* rainfall) with 50% recall on severe events.
+2. **Best Balanced Minority Recall – Decision Tree (Macro F1: 0.2179, Macro Recall: 0.3053)**
+   - Utilizes balanced class weighting to capture underrepresented extreme weather categories (e.g., *Extremely Heavy* and *Very Heavy* rainfall).
 
 3. **Fastest Execution – KNN (Instantaneous fit, ~0.00s)**
-   - Non-parametric baseline offering competitive accuracy (39.76%) with zero upfront training overhead.
+   - Non-parametric baseline offering competitive accuracy (39.78%) with zero upfront training overhead.
 
 4. **Regression Baseline – Linear Regression (`R² = 0.0081`, `RMSE = 25.56 mm`)**
    - Illustrates linear feature weights for spatial coordinates and day-of-year seasonal variables.

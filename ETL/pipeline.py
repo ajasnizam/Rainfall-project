@@ -12,16 +12,29 @@ Execution:
     python pipeline.py
 """
 
+from pathlib import Path
 import pandas as pd
 import numpy as np
 
 # --------------------------------------------------------------------------
-# Paths and constants (pure string paths)
+# Paths and constants
 # --------------------------------------------------------------------------
-SOURCE_FILE = "raw_data/rainfall_1.csv"
-RAW_COPY = "raw_data/rainfall_raw_copy.csv"
-OUTPUT_FILE = "output/analysis_ready_rainfall.csv"
-REPORTS_DIR = "reports/"
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "ETL" else SCRIPT_DIR
+
+possible_sources = [
+    SCRIPT_DIR / "raw_data" / "rainfall new.csv",
+    PROJECT_ROOT / "raw_data" / "rainfall new.csv",
+    SCRIPT_DIR / "raw_data" / "rainfall_1.csv",
+    PROJECT_ROOT / "raw_data" / "rainfall_1.csv",
+    Path("raw_data/rainfall new.csv"),
+    Path("raw_data/rainfall_1.csv"),
+]
+
+SOURCE_FILE = next((str(p) for p in possible_sources if p.exists()), str(PROJECT_ROOT / "raw_data" / "rainfall new.csv"))
+RAW_COPY = str(SCRIPT_DIR / "raw_data" / "rainfall_raw_copy.csv")
+OUTPUT_FILE = str(SCRIPT_DIR / "output" / "analysis_ready_rainfall.csv")
+REPORTS_DIR = str(SCRIPT_DIR / "reports")
 
 COLUMN_MAP = {
     "SlNo": "sl_no",
@@ -354,15 +367,28 @@ def transform(df):
 # STEP 8: LOAD (Member 5)
 # --------------------------------------------------------------------------
 def load(datasets):
-    """Save all reports to reports/ and the analysis-ready dataset to output/."""
+    """Save all reports to reports/ and the analysis-ready dataset to output folders."""
     print("\n=== STEP 8: LOAD (Member 5) ===")
 
-    for name, table in datasets.items():
-        table.to_csv(f"reports/{name}", index=False)
-        print(f"  Saved reports/{name}")
+    reports_dir = Path(REPORTS_DIR)
+    reports_dir.mkdir(parents=True, exist_ok=True)
 
-    datasets["cleaned_data.csv"].to_csv(OUTPUT_FILE, index=False)
-    print(f"  Saved {OUTPUT_FILE}")
+    for name, table in datasets.items():
+        file_path = reports_dir / name
+        table.to_csv(file_path, index=False)
+        print(f"  Saved {file_path}")
+
+    cleaned = datasets["cleaned_data.csv"]
+    output_targets = [
+        Path(OUTPUT_FILE),
+        PROJECT_ROOT / "output" / "analysis_ready_rainfall.csv",
+        PROJECT_ROOT / "Supervised_Learning" / "analysis_ready_rainfall.csv",
+    ]
+
+    for out_path in output_targets:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        cleaned.to_csv(out_path, index=False)
+        print(f"  Saved {out_path}")
 
 
 # --------------------------------------------------------------------------

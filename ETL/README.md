@@ -39,7 +39,7 @@ Every transformation step is systematically tracked and row-counted in `reports/
 | **Dataset** | Kerala Surface Water Manual Daily Rainfall Station Data |
 | **Original Provider** | National Water Development Agency / National Water Informatics Centre (NWIC), Ministry of Jal Shakti, Government of India |
 | **Direct Download** | [NWIC Kerala Manual Daily Rainfall Portal](https://nwdp.nwic.gov.in/dataset/rainfall-kerala-surface-water-manual-daily/resource/d175f1f6-cccf-4980-97ab-877650d05074) |
-| **Format / Type** | CSV, Structured tabular data (20 original raw columns, 53,162 records) |
+| **Format / Type** | CSV, Structured tabular data (15 original raw columns, 53,162 records) |
 | **Temporal Coverage** | 01 January 2021 – 31 December 2021 (with continuous monitoring records) |
 | **Geographic Scope** | All 14 districts of Kerala, covering 104+ dedicated rain-gauge stations |
 | **Update Frequency** | Static historical snapshot derived from daily telemetry recordings |
@@ -49,13 +49,13 @@ Every transformation step is systematically tracked and row-counted in `reports/
 ## ETL Workflow
 
 ```
-                        Data Source (raw_data/rainfall_1.csv)
+                        Data Source (raw_data/rainfall new.csv)
                                         │
                                         ▼
     +──────────────────────────────────────────────────────────────────────────+
     |                             EXTRACT extract()                            |
     |  • Ingest CSV from raw_data/                                             |
-    |  • Assert schema, dimension checks (53,162 rows × 20 cols)               |
+    |  • Assert schema, dimension checks (53,162 rows × 15 cols)               |
     |  • Generate immutable raw backup (raw_data/rainfall_raw_copy.csv)        |
     |  • Responsibility: Member 2 (Jesvin)                                     |
     +──────────────────────────────────────────────────────────────────────────+
@@ -99,7 +99,7 @@ Every transformation step is systematically tracked and row-counted in `reports/
                                         ▼
     +──────────────────────────────────────────────────────────────────────────+
     |                               LOAD load()                                |
-    |  • Persist clean analysis-ready dataset to output/ (52,522 × 24 cols)    |
+    |  • Persist clean analysis-ready dataset to output/ (52,522 × 21 cols)    |
     |  • Persist all 11 reports to reports/                                    |
     |  • Responsibility: Member 5 (Ajas)                                       |
     +──────────────────────────────────────────────────────────────────────────+
@@ -127,7 +127,7 @@ Every transformation step is systematically tracked and row-counted in `reports/
 ```
 Rainfall-project/
 ├── raw_data/
-│   ├── rainfall_1.csv                   # Untouched raw input data from government portal
+│   ├── rainfall new.csv                 # Untouched raw input data from government portal
 │   └── rainfall_raw_copy.csv            # Automated extract archive copy
 ├── reports/                             # Generated analytical CSV reports (11 files)
 │   ├── cleaned_data.csv                 # Complete cleaned dataset copy

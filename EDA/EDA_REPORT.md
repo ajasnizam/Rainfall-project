@@ -1,6 +1,6 @@
 # Kerala Rainfall Meteorological Data - Exploratory Data Analysis (EDA)
 
-**Input:** `output/analysis_ready_rainfall.csv` ($52,522$ rows $\times$ $24$ columns), produced by the ETL pipeline. Run `python pipeline.py` first. All charts are produced by `eda.py` and saved to `output/eda/`.
+**Input:** `output/analysis_ready_rainfall.csv` ($52,522$ rows $\times$ $21$ columns), produced by the ETL pipeline. Run `python pipeline.py` first. All charts are produced by `eda.py` and saved to `output/eda/`.
 
 **Questions:** When and where does it rain the most in Kerala? What is the intensity and seasonal distribution of rainfall? Which districts and stations face extreme deluge events? How do geography, river catchments, and monsoon cycles govern precipitation?
 
