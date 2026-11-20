@@ -132,6 +132,13 @@ Rainfall-project/
 │       ├── MEMBER_3_ASLAF_README.md        # Member 3 contributions
 │       ├── MEMBER_4_SREEJITH_README.md     # Member 4 contributions
 │       └── MEMBER_5_AJAS_README.md         # Member 5 contributions
+├── Unsupervised_Learning/                  # Unsupervised Machine Learning Module
+│   ├── K-Means.py                          # K-Means clustering & Elbow method
+│   ├── Agglomerative.py                    # Hierarchical Agglomerative clustering & Dendrogram
+│   ├── compare_models.py                   # Benchmark comparing K-Means vs. Agglomerative
+│   ├── analysis_ready_rainfall.csv         # Local dataset copy
+│   ├── README.md                           # Unsupervised Learning detailed documentation
+│   └── Screenshots/                        # Cluster plots & Dendrogram visual charts
 ├── pipeline.py                             # Complete, modular ETL pipeline script
 ├── requirements.txt                        # Unified project dependencies
 └── README.md                               # Master project documentation
